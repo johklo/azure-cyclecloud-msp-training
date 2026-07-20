@@ -5,11 +5,16 @@
 ## 배포되는 리소스
 - VNet(`cc-vnet`) + 서브넷(`cyclecloud`, `compute`) + NSG(`cc-nsg`, 443/80/22)
 - Public IP(`cc-pip`, DNS 레이블 포함)
-- CycleCloud 8 서버 VM(`cc-server`, 시스템 할당 관리 ID)
-- Locker 용 Storage Account + `cyclecloud` 컨테이너
+- CycleCloud 8 서버 VM(`cc-server`, **시스템 할당 + 사용자 할당 관리 ID**)
+- Locker 용 Storage Account + `cyclecloud` 컨테이너 (**공용 접근 차단**)
+- Locker 용 사용자 할당 관리 ID(`cc-locker-id`) + Blob 데이터 권한
+- Blob **프라이빗 엔드포인트** + Private DNS 존(`privatelink.blob.*`)
+- 역할 할당: 서버 시스템 ID → RG `Contributor`, `cc-locker-id` → `Storage Blob Data Contributor`
 
-> ⚠️ 노드 생성 권한(구독 범위 `Contributor`)은 보안상 Bicep 에 포함하지 않고
-> 배포 후 별도 명령으로 부여합니다(아래 3번).
+> ℹ️ 이 구독은 Azure Policy 로 스토리지의 **공용 접근/공유 키 인증이 강제 차단**됩니다.
+> 따라서 CycleCloud Locker 는 공유 키가 아닌 **관리 ID(Managed Identity)** 로 접근해야 하며,
+> 서버·계산 노드가 Locker 에 도달하도록 **Blob 프라이빗 엔드포인트**가 필요합니다.
+> 위 리소스와 역할 할당은 모두 Bicep 에 포함되어 자동 구성됩니다.
 
 ## 사전 준비
 ```powershell
@@ -36,16 +41,20 @@ az deployment group create `
   --parameters adminSshPublicKey="$pub" allowedSshCidr="$myip/32"
 ```
 
-## 3. 관리 ID 에 노드 생성 권한 부여 (배포 후 1회)
-```powershell
-$pid = az deployment group show -g rg-cyclecloud-training -n cyclecloud-deploy `
-  --query properties.outputs.principalId.value -o tsv
-az role assignment create --assignee-object-id $pid `
-  --assignee-principal-type ServicePrincipal `
-  --role Contributor --scope /subscriptions/<YOUR_SUBSCRIPTION_ID>
-```
+## 3. CycleCloud 계정(구독) 등록 — 관리 ID Locker
 
-## 4. 출력값 확인 (포털 URL 등)
+포털 최초 설정 마법사 또는 CLI 로 Azure 구독을 등록할 때, Locker 인증을 **Managed Identity**
+로 지정하고 `cc-locker-id` 를 사용해야 합니다. 배포 출력의 `lockerIdentityResourceId` 를 사용합니다.
+
+- **포털**: Settings → **Add Subscription** → 인증에서 *Managed Identity* 선택 →
+  Storage Locker 를 만들 때 **Locker Authentication = Managed Identity**, 자격증명으로 `cc-locker-id` 선택.
+- 등록 시 서브넷은 `cc-vnet` / `compute`, 스토리지는 배포된 `cclk...` 계정을 지정합니다.
+
+> ⚠️ Locker 를 **Shared Access Key** 로 만들면 정책상 스토리지 공유 키가 차단되어
+> 노드가 `Staging resources (403)` 에서 실패합니다. 반드시 Managed Identity 를 사용하세요.
+> 자세한 증상/해결은 [트러블슈팅](../docs/06-트러블슈팅-로그.md) 6.4 참조.
+
+## 4. 출력값 확인 (포털 URL, Locker 관리 ID 등)
 ```powershell
 az deployment group show -g rg-cyclecloud-training -n cyclecloud-deploy `
   --query properties.outputs
