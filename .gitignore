@@ -1,0 +1,15 @@
+# SSH keys / secrets — do not commit
+keys/
+*.pem
+*.key
+cyclecloud_rsa*
+cc_key*
+cc_admin*
+
+# Bicep build artifacts
+infra/*.json
+!infra/main.parameters.json
+
+# OS
+Thumbs.db
+.DS_Store
