@@ -41,5 +41,3 @@ cyclecloud/
 1. 가이드 목차부터 읽기 → [docs/README.md](docs/README.md)
 2. 환경을 새로 만들거나 삭제하려면 → [infra/README.md](infra/README.md)
 
-## 지원 (Azure SRE 팀)
-이동훈 · 김태진 · 지민근
