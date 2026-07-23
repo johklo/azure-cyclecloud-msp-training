@@ -125,6 +125,40 @@ Job 실행 → 완료·유휴 시 노드 자동 감설(비용 절감).
 
 이제 위 규격에 맞는 python-pptx 스크립트를 출력하라.
 
+# 참조 파일 (저장소 접근이 가능한 경우 우선 활용)
+> LLM/세션이 이 저장소(`johklo/azure-cyclecloud-msp-training`)에 접근 가능하면, 아래 파일을 직접 열어
+> 최신 내용을 반영하라. 접근 불가하면 위 '근거 사실' 블록만으로 작성한다.
+> 파일 내용과 위 근거 사실이 다르면 **저장소 파일을 우선**한다(문서가 최신).
+
+## 실습 매뉴얼 (docs/, 슬라이드 내용의 1차 출처)
+- `docs/README.md` — 12개 모듈 목차·구성(네비게이션 기준)
+- `docs/01-환경-개요.md` — 아키텍처, KT 환경 현황, 버전 매트릭스
+- `docs/02-포털-사용법.md` — 포털 사용 방법
+- `docs/03-신규-클러스터-생성.md` — 서버·클러스터 신규 생성(설치 마법사)
+- `docs/04-노드-증감설-사이즈변경.md` — 노드 증/감설·SKU 변경·azslurm scale·재부팅
+- `docs/05-스토리지-디스크-마운트.md` — Blob NFS/Files/Lustre·OS Disk
+- `docs/06-cluster-init-및-커스텀-스크립트.md` — cluster-init/커스텀 스크립트
+- `docs/07-Job-Accounting-설정.md` — Slurm Job Accounting(MySQL)
+- `docs/08-사용자-관리.md` — Built-in/AD/LDAP/Entra ID 사용자 관리
+- `docs/09-파티션-관리-및-추가.md` — 파티션 관리·추가
+- `docs/10-GPU-모니터링-구축.md` — Prometheus/Grafana GPU 모니터링
+- `docs/11-트러블슈팅-로그.md` — 로그 진단·Triage·capture_logs
+- `docs/12-데모-런북.md` — 진행자 데모 체크리스트
+
+## 원본 브리핑/참고 자료 (KT 현황·시각 자료)
+- `docs/Cyclecloud_260722.pptx` — KT 엔지니어 원본 브리핑(버전 현황·운영 특이사항 1차 출처)
+- `docs/Cyclecloud_MSP_Training.pptx`, `docs/Cyclecloud_260722_Updated.pptx` — 교육/KT 현황 정리 덱
+- `docs/CycleCloud_MSP_소개.pptx` — MSP 운영 온보딩 소개 덱(본 프롬프트 결과물의 참고 예시)
+- `docs/Nvidia GPU and Infiniband Monitoring 1.pptx`, `docs/Fun CycleCloud for NGC_0528.pdf`,
+  `docs/Using Slurm with Azure CycleCloud - October 2020 Fun Friday.pptx` — 보조 참고
+- `docs/images/` 하위 폴더(스크린샷): `check-version`, `add-node`, `node_scaling`, `disk-resize`,
+  `cluster-init`, `slurm_job_accounting`, `user-management`, `add-new-partition`,
+  `gpu-monitoring`, `gpu-monitoring-v2` — 단계별 실제 포털 스크린샷(필요 시 슬라이드에 인용 가능)
+
+## 비주얼 규격 참고 스크립트 (동일 톤 재현)
+- `create_pptx.py` — 교육+KT 현황 덱 생성 스크립트(헬퍼 함수·색상 규격의 원본)
+- `create_intro_pptx.py` — MSP 운영 온보딩 덱 생성 스크립트(본 규격의 직접 예시)
+
 === PROMPT END ===
 
 ---
