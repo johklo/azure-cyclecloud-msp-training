@@ -64,6 +64,9 @@
 11. [11. 기본 트러블슈팅 및 로그 확인 (Triage Matrix)](11-트러블슈팅-로그.md)
 12. [12. 데모 런북 (진행자 체크리스트)](12-데모-런북.md)
 
+### 부록 (심화)
+- [부록. CycleCloud Prometheus 모니터링 구축 (전반)](부록-Prometheus-모니터링.md) — 내장 Monitoring 탭 + Azure Monitor Workspace(Managed Prometheus) + Managed Grafana + Exporter(9100/9101/9400) + Self-hosted 대안
+
 ---
 
 ## 🛠️ 인프라 재배포 (IaC)

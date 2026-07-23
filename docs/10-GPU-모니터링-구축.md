@@ -88,4 +88,6 @@ cd cyclecloud-slurm/azure-slurm-exporter
 
 ---
 
+> 📎 CycleCloud **전반**(스케줄러 포함) Prometheus 파이프라인·Exporter 포트·Self-hosted 옵션은 [부록. CycleCloud Prometheus 모니터링 구축](부록-Prometheus-모니터링.md)을 참고하세요.
+
 다음 단계: [11. 트러블슈팅 및 로그 확인](11-트러블슈팅-로그.md)
