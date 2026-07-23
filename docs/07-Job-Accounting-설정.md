@@ -24,6 +24,10 @@
 
 ## 7.3 웹 포털 GUI에서 Job Accounting 활성화
 
+Cyclecloud UI에서 Job Accounting을 활성화하는 방법이며, 이미 생성된 클러스터의 경우 클러스터 재시작이 필요하다. 클러스터 재시작이 어려운 경우 아래 방법 B를 활용하되, 재시작을 고려하여 UI에도 적용해둔다.
+
+Cyclecloud UI > Cluster > (이미 생성된 경우) Edit > Advanced Settings > Slurm Settings > Job Accounting 선택> 정보 입력
+
 ![CycleCloud GUI Job Accounting 설정](images/slurm_job_accounting/1780229362762.png)
 
 1. **Clusters → 해당 클러스터 → Edit → Advanced Settings**.
