@@ -1,6 +1,6 @@
 # Azure CycleCloud 운영 교육 가이드 (MSP & KT 현황)
 
-이 문서는 **Azure CycleCloud**를 처음 다루는 Cloud MSP 운영 담당자가 실습 환경에서 직접 따라 하며 익히고, **KT CycleCloud 구축 현황 및 핵심 운영 지침**을 완벽하게 습득할 수 있도록 작성된 종합 교육 가이드입니다.
+Azure CycleCloud 실습 환경과 KT 운영 지침을 정리한 MSP 운영 담당자용 교육 가이드입니다.
 
 ---
 
@@ -23,7 +23,7 @@
 | 구분 | 파일 / 경로 | 설명 |
 |------|-------------|------|
 | **강의 발표자료 (PPTX)** | [`docs/Cyclecloud_MSP_Training.pptx`](Cyclecloud_MSP_Training.pptx) | 최초 클러스터 구축, 아키텍처, KT 현황 브리핑 발표용 11슬라이드 PPT |
-| **Bicep 자동 배포** | [`infra/deploy-lab.ps1`](../infra/deploy-lab.ps1) / [`deploy-lab.sh`](../infra/deploy-lab.sh) | 클릭 한 번으로 실습 리소스 전체 자동 구성 스크립트 |
+| **Bicep 자동 배포** | [`infra/deploy-lab.ps1`](../infra/deploy-lab.ps1) / [`deploy-lab.sh`](../infra/deploy-lab.sh) | 실습 리소스 전체 자동 구성 스크립트 |
 | **자동 정리 스크립트** | [`infra/destroy-lab.ps1`](../infra/destroy-lab.ps1) | 실습 완료 후 서버 일시 중지(Deallocate) 및 삭제 스크립트 |
 | **실습 캡처 이미지** | [`docs/images/`](images/) | 69개 웹 포털 GUI 및 터미널 실습 스크린샷 모음 |
 
@@ -48,7 +48,7 @@
 
 ### Part 1 & 2. 개요, 최초 구축 및 포털 관리
 1. [01. 환경 개요 및 아키텍처 (KT 현황 포함)](01-환경-개요.md)
-2. [02. CycleCloud 포털 사용 방법 & 버전 확인](02-포털-사용법.md)
+2. [13. 버전 확인 (CycleCloud / Slurm)](13-버전-확인.md)
 3. **[03. CycleCloud 신규 생성 및 최초 클러스터 구축 (First-Time Setup)](03-신규-클러스터-생성.md)**
 4. [04. 노드 증/감설, 사이즈 변경 & Scale-in 방지](04-노드-증감설-사이즈변경.md)
 5. [05. Storage Account / Disk 마운트 (OS Disk, Blob, Lustre)](05-스토리지-디스크-마운트.md)

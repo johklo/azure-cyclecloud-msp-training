@@ -46,7 +46,7 @@ Job 실행 → 완료·유휴 시 노드 자동 감설(비용 절감).
 - ① 신규 생성(서버·클러스터 구축) → Module 03
 - ② 노드 증/감설·사이즈(VM SKU) 변경 → Module 04
 - ③ Storage Account·Disk 마운트 → Module 05
-- ④ 포털 사용 방법 → Module 02
+- ④ 포털 사용 방법 → Module 03
 - ⑤ 기본 트러블슈팅(로그 확인) → Module 11
 - 심화: 06 cluster-init, 07 Job Accounting, 08 사용자 관리, 09 파티션, 10 GPU 모니터링, 12 데모 런북
 
@@ -133,7 +133,7 @@ Job 실행 → 완료·유휴 시 노드 자동 감설(비용 절감).
 ## 실습 매뉴얼 (docs/, 슬라이드 내용의 1차 출처)
 - `docs/README.md` — 12개 모듈 목차·구성(네비게이션 기준)
 - `docs/01-환경-개요.md` — 아키텍처, KT 환경 현황, 버전 매트릭스
-- `docs/02-포털-사용법.md` — 포털 사용 방법
+- `docs/13-버전-확인.md` — CycleCloud/Slurm 버전 확인
 - `docs/03-신규-클러스터-생성.md` — 서버·클러스터 신규 생성(설치 마법사)
 - `docs/04-노드-증감설-사이즈변경.md` — 노드 증/감설·SKU 변경·azslurm scale·재부팅
 - `docs/05-스토리지-디스크-마운트.md` — Blob NFS/Files/Lustre·OS Disk

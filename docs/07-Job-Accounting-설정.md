@@ -1,13 +1,13 @@
 # 7. Slurm Job Accounting 설정
 
-이 문서는 Slurm 클러스터의 작업 실행 이력, 자원 사용량(CPU/GPU/메모리)을 영구 보존하여 정산 및 가용성 분석에 활용하는 **Job Accounting (`sacct`) 구축 방법**과 **Azure Database for MySQL - Flexible Server 연동 절차**를 설명합니다.
+이 문서는 Slurm 작업 이력과 자원 사용량(CPU/GPU/메모리)을 영구 보존하기 위한 **Job Accounting (`sacct`)** 및 **Azure Database for MySQL - Flexible Server** 연동 절차를 다룹니다.
 
 ---
 
 ## 7.1 Job Accounting 의 필요성
 
 - **이력 소실 방지**: Slurm 기본 설정은 작업 이력을 메모리에만 보관하므로 스케줄러 재시작 시 데이터가 사라집니다.
-- **비용 정산 (Chargeback)**: 사용자, 팀, 프로젝트별 CPU/GPU 사용 시간을 정밀하게 집계할 수 있습니다.
+- **비용 정산 (Chargeback)**: 사용자, 팀, 프로젝트별 CPU/GPU 사용 시간을 집계할 수 있습니다.
 - **용량 계획**: `sacct`, `sreport` 명령어로 자원 효율성(대기 시간 vs 실행 시간)을 분석할 수 있습니다.
 
 ---
@@ -24,7 +24,7 @@
 
 ## 7.3 웹 포털 GUI에서 Job Accounting 활성화
 
-Cyclecloud UI에서 Job Accounting을 활성화하는 방법이며, 이미 생성된 클러스터의 경우 클러스터 재시작이 필요하다. 클러스터 재시작이 어려운 경우 아래 방법 B를 활용하되, 재시작을 고려하여 UI에도 적용해둔다.
+기존 클러스터는 UI 설정 적용 후 재시작이 필요합니다. 재시작이 어렵다면 7.4의 수동 연동을 먼저 적용하고, 다음 재시작을 대비해 UI에도 값을 저장합니다.
 
 Cyclecloud UI > Cluster > (이미 생성된 경우) Edit > Advanced Settings > Slurm Settings > Job Accounting 선택> 정보 입력
 
@@ -43,7 +43,7 @@ Cyclecloud UI > Cluster > (이미 생성된 경우) Edit > Advanced Settings > S
 
 ## 7.4 운영 중인 클러스터 수동 연동 (`slurmdbd`)
 
-이미 기동 중인 클러스터에서 재시작 없이 `slurmdbd`를 수동 설정하는 방법입니다.
+이미 기동 중인 클러스터에서 재시작 없이 `slurmdbd`를 수동 설정합니다.
 
 ### 1) SSL CA 인증서 다운로드
 스케줄러 노드에서 DigiCert 글로벌 루트 인증서를 다운로드합니다.
@@ -52,14 +52,14 @@ sudo wget https://cacerts.digicert.com/DigiCertGlobalRootG2.crt.pem -O /etc/slur
 ```
 
 ### 2) Accounting 활성화 및 GPU 추적 (`/etc/slurm/accounting.conf`)
-Accounting 스토리지 유형과 **추적할 자원(TRES)** 을 지정합니다. **GPU 사용량을 집계하려면 `gres/gpu` 를 반드시 포함**해야 합니다.
+Accounting 스토리지 유형과 **추적할 자원(TRES)** 을 지정합니다. **GPU 사용량 집계에는 `gres/gpu` 가 필요**합니다.
 ```ini
 # /etc/slurm/accounting.conf
 AccountingStorageType=accounting_storage/slurmdbd
 AccountingStorageHost=<cluster-name>-scheduler
 AccountingStorageTRES=gres/gpu     # ⭐ GPU 사용량(카드 수·시간) 추적에 필수
 ```
-> 🚨 **GPU 고객 환경 핵심**: `AccountingStorageTRES=gres/gpu` 가 없으면 `sacct` 에서 CPU/메모리는 보이지만 **GPU 할당량(AllocTRES 의 `gres/gpu=N`)이 기록되지 않습니다.** GPU 갯수 기준 정산·쿼터 분석을 하려면 이 설정이 반드시 있어야 합니다.
+> `AccountingStorageTRES=gres/gpu` 가 없으면 `sacct` 에 CPU/메모리는 기록되지만 GPU 할당량(AllocTRES 의 `gres/gpu=N`)은 기록되지 않습니다.
 
 ### 3) DB 접속 설정 (`/etc/slurm/slurmdbd.conf`)
 ```ini

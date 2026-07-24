@@ -103,7 +103,7 @@ def build(output_path):
         "① → Module 03 (신규 생성/최초 구축)",
         "② → Module 04 (노드 증감설·사이즈)",
         "③ → Module 05 (스토리지·디스크 마운트)",
-        "④ → Module 02 (포털 사용법)",
+        "④ → Module 03 (포털 사용법)",
         "⑤ → Module 11 (트러블슈팅·로그 진단)",
         "심화: 06 cluster-init · 07 Accounting ·",
         "  08 사용자 · 09 파티션 · 10 GPU 모니터링",

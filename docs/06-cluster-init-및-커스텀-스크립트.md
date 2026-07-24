@@ -1,6 +1,6 @@
 # 6. cluster-init 및 커스텀 스크립트
 
-이 문서는 노드 부팅 시 스크립트를 수행하는 두 가지 방식인 **cloud-init**과 **cluster-init**의 차이점을 설명하고, **KT 운영 환경의 필수 규칙인 cluster-init 프로젝트 작성, 업로드 및 적용 절차**를 다룹니다.
+이 문서는 노드 부팅 스크립트 방식인 **cloud-init**과 **cluster-init** 비교, KT 운영 환경의 cluster-init 프로젝트 작성·업로드·적용 절차를 다룹니다.
 
 ---
 
@@ -14,17 +14,18 @@
 | **재실행** | 불가 | `jetpack converge` 명령으로 노드에서 즉시 재실행 가능 |
 | **버전 관리** | 불가 | `project.ini` 파일 기반 프로젝트 버전 단위 관리 |
 
-> 🚨 **KT 운영 핵심 규칙: cloud-init 수정 금지**  
-> 운영 중인 클러스터에서 `cloud-init`을 수정하면 새로 뜨는 노드가 기존 VMSS 속성과 불일치하여 아래 오류가 발생하며 노드 프로비저닝이 실패합니다.  
-> `This node does not match existing scaleset attribute: CloudInit`  
-> 따라서 KT 환경에서는 노드 구성 스크립트 작성 시 **반드시 cluster-init 프로젝트 방식을 사용**합니다. (KT 환경에는 Scale-in 방지, NVIDIA 드라이버 버전 업, 마운트 등 4~5개 스크립트가 적용되어 있음)
+> 🚨 **KT 운영 규칙: cloud-init 수정 금지**  
+> 운영 중인 클러스터에서 `cloud-init`을 수정하면 새 노드가 기존 VMSS 속성과 불일치하여 프로비저닝이 실패합니다. KT 환경에서는 노드 구성 스크립트 작성 시 **반드시 cluster-init 프로젝트 방식**을 사용합니다.  
+> `This node does not match existing scaleset attribute: CloudInit`
+
+KT 환경에는 Scale-in 방지, NVIDIA 드라이버 버전 업, 마운트 등 4~5개 스크립트가 적용되어 있습니다.
 
 ---
 
 ## 6.2 cluster-init 프로젝트 생성 및 구조
 
 ### 1) 프로젝트 초기화
-CycleCloud Server VM(`cc-server`) 접속 후:
+CycleCloud Server VM(`cc-server`)에서 실행합니다.
 ```bash
 mkdir -p ~/cluster-init && cd ~/cluster-init
 cyclecloud project init myproject
@@ -48,7 +49,7 @@ myproject/
 ## 6.3 버전 관리 및 스크립트 작성
 
 ### 1) `project.ini` 버전 관리
-스크립트를 수정할 때는 `project.ini`에서 버전을 올려 배포합니다.
+스크립트 수정 시 `project.ini` 버전을 올려 배포합니다.
 ```ini
 [project]
 name = myproject
@@ -58,7 +59,7 @@ version = 1.0.1   # 기존 1.0.0 에서 버전 상향
 ![project.ini 편집 화면](images/cluster-init/1780278838710.png)
 
 ### 2) 스크립트 작성 (`specs/default/cluster-init/scripts/`)
-파일명 순서대로 실행되므로 `01-`, `02-` 형태의 접두사를 부여하는 것을 권장합니다.
+파일명 순서대로 실행되므로 `01-`, `02-` 형태의 접두사를 권장합니다.
 
 ```bash
 # specs/default/cluster-init/scripts/01-install-packages.sh

@@ -16,7 +16,6 @@ cyclecloud/
 │  ├─ Cyclecloud_MSP_Training.pptx # 11슬라이드 발표용 PowerPoint 파일
 │  ├─ README.md                # 교육 마스터 목차
 │  ├─ 01-환경-개요.md
-│  ├─ 02-포털-사용법.md
 │  ├─ 03-신규-클러스터-생성.md     # 최초 클러스터 구축 및 초기 설정 가이드
 │  ├─ 04-노드-증감설-사이즈변경.md
 │  ├─ 05-스토리지-디스크-마운트.md
@@ -27,6 +26,7 @@ cyclecloud/
 │  ├─ 10-GPU-모니터링-구축.md
 │  ├─ 11-트러블슈팅-로그.md
 │  ├─ 12-데모-런북.md
+│  ├─ 13-버전-확인.md
 │  └─ images/                  # 69개 실습 스크린샷 (10개 주제별 분류)
 └─ keys/                       # SSH 키 보관 폴더
 ```
@@ -41,7 +41,7 @@ cyclecloud/
 | **2. 최초 클러스터 구축 및 초기 설정** | [`docs/03-신규-클러스터-생성.md`](docs/03-신규-클러스터-생성.md) |
 | **3. 노드 증/감설, 사이즈 변경** | [`docs/04-노드-증감설-사이즈변경.md`](docs/04-노드-증감설-사이즈변경.md) |
 | **4. Storage Account, Disk 마운트** | [`docs/05-스토리지-디스크-마운트.md`](docs/05-스토리지-디스크-마운트.md) |
-| **5. CycleCloud 포털 사용 방법** | [`docs/02-포털-사용법.md`](docs/02-포털-사용법.md) |
+| **5. CycleCloud 포털 사용 방법** | [`docs/03-신규-클러스터-생성.md`](docs/03-신규-클러스터-생성.md) |
 | **6. cluster-init & cloud-init 규칙** | [`docs/06-cluster-init-및-커스텀-스크립트.md`](docs/06-cluster-init-및-커스텀-스크립트.md) |
 | **7. Slurm Job Accounting (MySQL)** | [`docs/07-Job-Accounting-설정.md`](docs/07-Job-Accounting-설정.md) |
 | **8. Built-in 사용자 및 키페어 관리** | [`docs/08-사용자-관리.md`](docs/08-사용자-관리.md) |

@@ -13,3 +13,9 @@ infra/*.json
 # OS
 Thumbs.db
 .DS_Store
+
+# Office temp lock files
+~$*
+
+# Doc editing intermediates (regenerated from docs/*.md)
+docs/docx/
