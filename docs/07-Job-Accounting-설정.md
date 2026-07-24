@@ -51,7 +51,17 @@ Cyclecloud UI > Cluster > (이미 생성된 경우) Edit > Advanced Settings > S
 sudo wget https://cacerts.digicert.com/DigiCertGlobalRootG2.crt.pem -O /etc/slurm/AzureCA.pem
 ```
 
-### 2) DB 접속 설정 (`/etc/slurm/slurmdbd.conf`)
+### 2) Accounting 활성화 및 GPU 추적 (`/etc/slurm/accounting.conf`)
+Accounting 스토리지 유형과 **추적할 자원(TRES)** 을 지정합니다. **GPU 사용량을 집계하려면 `gres/gpu` 를 반드시 포함**해야 합니다.
+```ini
+# /etc/slurm/accounting.conf
+AccountingStorageType=accounting_storage/slurmdbd
+AccountingStorageHost=<cluster-name>-scheduler
+AccountingStorageTRES=gres/gpu     # ⭐ GPU 사용량(카드 수·시간) 추적에 필수
+```
+> 🚨 **GPU 고객 환경 핵심**: `AccountingStorageTRES=gres/gpu` 가 없으면 `sacct` 에서 CPU/메모리는 보이지만 **GPU 할당량(AllocTRES 의 `gres/gpu=N`)이 기록되지 않습니다.** GPU 갯수 기준 정산·쿼터 분석을 하려면 이 설정이 반드시 있어야 합니다.
+
+### 3) DB 접속 설정 (`/etc/slurm/slurmdbd.conf`)
 ```ini
 # /etc/slurm/slurmdbd.conf
 AuthType=auth/munge
@@ -71,7 +81,7 @@ StorageUser=<DB_USER>
 StorageParameters=SSL_CA=/etc/slurm/AzureCA.pem
 ```
 
-### 3) 권한 설정 및 데모 기동
+### 4) 권한 설정 및 데모 기동
 ```bash
 sudo chown slurm:slurm /etc/slurm/slurmdbd.conf
 sudo chmod 600 /etc/slurm/slurmdbd.conf
