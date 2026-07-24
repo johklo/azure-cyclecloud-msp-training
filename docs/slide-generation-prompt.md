@@ -137,11 +137,11 @@ Job 실행 → 완료·유휴 시 노드 자동 감설(비용 절감).
 - `docs/03-신규-클러스터-생성.md` — 서버·클러스터 신규 생성(설치 마법사)
 - `docs/04-노드-증감설-사이즈변경.md` — 노드 증/감설·SKU 변경·azslurm scale·재부팅
 - `docs/05-스토리지-디스크-마운트.md` — Blob NFS/Files/Lustre·OS Disk
-- `docs/06-cluster-init-및-커스텀-스크립트.md` — cluster-init/커스텀 스크립트
+- `docs/02-cluster-init-및-커스텀-스크립트.md` — cluster-init/커스텀 스크립트
 - `docs/07-Job-Accounting-설정.md` — Slurm Job Accounting(MySQL)
 - `docs/08-사용자-관리.md` — Built-in/AD/LDAP/Entra ID 사용자 관리
 - `docs/09-파티션-관리-및-추가.md` — 파티션 관리·추가
-- `docs/10-GPU-모니터링-구축.md` — Prometheus/Grafana GPU 모니터링
+- `docs/10-모니터링.md` — Prometheus/Grafana 모니터링
 - `docs/11-트러블슈팅-로그.md` — 로그 진단·Triage·capture_logs
 - `docs/12-데모-런북.md` — 진행자 데모 체크리스트
 
